@@ -10,18 +10,17 @@ class ConatactCreate extends Component {
     }
 
     render() {
-        return (
-            this.props.createMode ?
-                <ContactForm onSubmit={this.onSubmit} /> :
-                <ContactDetail />
-        )
+        if (this.props.id) {
+            return <ContactDetail />
+        }
+        return <ContactForm onSubmit={this.onSubmit} />
     }
 }
 
 
 const mapStateToProps = (state) => {
     return {
-        createMode: state.selectedContact.create
+        id: state.selectedContact.id
     }
 }
 

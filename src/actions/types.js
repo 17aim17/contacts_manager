@@ -12,7 +12,3 @@ export const SET_CREATE_MODE = 'SET_CREATE_MODE'
 export const CLEAR_CREATE_MODE = 'CLEAR_CREATE_MODE'
 export const SET_EDIT_MODE = 'SET_EDIT_MODE'
 export const CLEAR_EDIT_MODE = 'CLEAR_EDIT_MODE'
-
-// modal meta data
-export const SET_MODAL = 'SET_MODAL'
-export const CLEAR_MODAL = 'CLEAR_MODAL'

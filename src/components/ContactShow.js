@@ -8,24 +8,22 @@ import { editContact } from '../actions/contactActions'
 // individual contact
 class ContactShow extends Component {
 
-    onSubmit = (formValues) => {
-        this.props.editContact(this.props.contact.id, formValues);
+    onEdit = (formValues) => {
+        this.props.editContact(this.props.id, formValues);
     }
 
     render() {
-        const { contact } = this.props
-        const initialValues = _.omit(contact, 'id')
-
-        return (
-            this.props.editMode ?
-                <ContactForm initialValues={initialValues} onSubmit={this.onSubmit} /> :
-                <ContactDetail />
-        )
+        if (this.props.editMode) {
+            return <ContactForm initialValues={this.props.contact} onSubmit={this.onEdit} />
+        }
+        return <ContactDetail />
     }
 }
 
 const mapStateToProps = (state) => {
     return {
+        id: state.selectedContact.id,
+        contact: state.contact[state.selectedContact.id],
         editMode: state.selectedContact.edit
     }
 }

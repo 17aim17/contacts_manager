@@ -6,6 +6,8 @@ const uid = 'ASHISH_ONE'
 
 export const addContact = (data) => (dispatch, getState) => {
     database.collection(`users/${uid}/contacts`).add(data).then((ref) => {
+        dispatch(setSelectedContact(ref.id))
+        dispatch(clearCreateMode())
         dispatch({
             type: CREATE_CONTACT,
             payload: {
@@ -17,6 +19,7 @@ export const addContact = (data) => (dispatch, getState) => {
 }
 
 export const syncAddContact = (data) => {
+
     return ({
         type: CREATE_CONTACT,
         payload: {
@@ -50,6 +53,9 @@ export const syncSetContact = (contact) => {
 
 export const editContact = (id, updates) => (dispatch, getState) => {
     database.collection('users').doc(`${uid}`).collection('contacts').doc(`${id}`).update({ ...updates }).then((ref) => {
+        dispatch(setSelectedContact(id))
+        console.log('was here');
+        dispatch(clearEditMode())
         dispatch({
             type: EDIT_CONTACT,
             payload: {
@@ -61,6 +67,8 @@ export const editContact = (id, updates) => (dispatch, getState) => {
 }
 
 export const syncEditContact = (id, updates) => {
+    console.log('sync edit');
+
     return {
         type: EDIT_CONTACT,
         payload: {
@@ -71,12 +79,15 @@ export const syncEditContact = (id, updates) => {
 }
 
 export const deleteContact = (id) => (dispatch, getState) => {
-    database.collection('users').doc(`${uid}`).collection('contacts').doc(`${id}`).delete()
-    dispatch({
-        type: DELETE_CONTACT,
-        payload: id
+    dispatch(clearSelectedContact())
+    database.collection('users').doc(`${uid}`).collection('contacts').doc(`${id}`).delete().then(() => {
+        dispatch({
+            type: DELETE_CONTACT,
+            payload: id
+        })
 
     })
+
 }
 
 export const syncDeleteContact = (id) => {
@@ -114,7 +125,7 @@ export const setEditMode = () => {
 // CLEAR_SELECTED_CONTACT
 export const clearEditMode = () => {
     return {
-        type: CLEAR_SELECTED_CONTACT
+        type: CLEAR_EDIT_MODE
     }
 }
 // SET_CREATE_MODE

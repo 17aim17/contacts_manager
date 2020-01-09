@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setCreateMode, clearCreateMode } from '../actions/contactActions'
-import { setModal, clearModal } from '../actions/modalActions'
 import Modal from './Modal'
 import ContactCreate from './ContactCreate'
 
 class Header extends Component {
+
     onClick = () => {
-        this.props.setModal()
         this.props.setCreateMode()
     }
+
     onDismiss = () => {
-        this.props.clearModal()
         this.props.clearCreateMode()
     }
+
     render() {
         return (
             <div>
@@ -30,11 +30,12 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
+    const { id, create } = state.selectedContact
     return {
-        isModalVisible: state.isModalVisible
+        isModalVisible: create || id
     }
 }
 
 export default connect(mapStateToProps, {
-    setCreateMode, clearCreateMode, setModal, clearModal
+    setCreateMode, clearCreateMode
 })(Header)

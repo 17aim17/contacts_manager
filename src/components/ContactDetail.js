@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { deleteContact, setEditMode } from '../actions/contactActions'
 
-class ContactDeatail extends Component {
+class ContactDetail extends Component {
+
     render() {
+        const { contact } = this.props;
+
         return (
             <div>
-                {this.props.contact.firstName}
+                {contact ? contact.firstName : ''}
+                <button onClick={this.props.setEditMode}>Edit</button>
+                <button onClick={() => this.props.deleteContact(contact.id)}>delete</button>
             </div>
         )
     }
@@ -16,4 +22,4 @@ const mapStateToProps = (state) => {
         contact: state.contact[state.selectedContact.id]
     }
 }
-export default connect(mapStateToProps, null)(ContactDeatail)
+export default connect(mapStateToProps, { setEditMode, deleteContact })(ContactDetail)

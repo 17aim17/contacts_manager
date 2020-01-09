@@ -4,19 +4,18 @@ import { connect } from 'react-redux'
 import Modal from './Modal'
 import ContactShow from './ContactShow'
 
-import { setSelectedContact, clearSelectedContact } from '../actions/contactActions'
-import { setModal, clearModal } from '../actions/modalActions'
+import { setSelectedContact, clearSelectedContact, clearEditMode } from '../actions/contactActions'
+
 
 class ContactList extends Component {
 
     onClick = (id) => {
-        this.props.setModal()
         this.props.setSelectedContact(id)
     }
 
     onDismiss = () => {
-        this.props.clearModal()
         this.props.clearSelectedContact()
+        this.props.clearEditMode()
     }
 
     renderItem = (contact) => {
@@ -45,10 +44,11 @@ class ContactList extends Component {
 }
 
 const mapStateToProps = (state) => {
+    const { id, edit } = state.selectedContact
     return {
         contacts: Object.values(state.contact),
-        isModalVisible: state.isModalVisible
+        isModalVisible: id || (edit && id)
     }
 }
 
-export default connect(mapStateToProps, { setSelectedContact, clearSelectedContact, setModal, clearModal })(ContactList)
+export default connect(mapStateToProps, { setSelectedContact, clearSelectedContact, clearEditMode })(ContactList)
