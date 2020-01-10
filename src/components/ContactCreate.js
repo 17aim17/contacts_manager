@@ -1,27 +1,42 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addContact } from '../actions/contactActions'
+import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+
+import { addContact, clearCreateMode } from '../actions/contactActions'
 import ContactForm from './ContactForm'
-import ContactDetail from './ContactDetail'
 
 class ConatactCreate extends Component {
     onSubmit = (formValues) => {
         this.props.addContact(formValues)
     }
+    onDismiss = () => {
+        this.props.clearCreateMode()
+    }
+
+    actions = () => {
+        return [
+            { text: 'Cancel', onClick: this.onDismiss }
+        ]
+    }
 
     render() {
-        if (this.props.id) {
-            return <ContactDetail />
-        }
-        return <ContactForm onSubmit={this.onSubmit} />
+        return (<ModalTransition>
+            {this.props.isModalVisible && (
+                <Modal actions={this.actions()} onClose={this.onDismiss} heading="Create a new Contact">
+                    <ContactForm onSubmit={this.onSubmit} />
+                </Modal>
+            )}
+        </ModalTransition>)
     }
 }
 
 
 const mapStateToProps = (state) => {
+    const { id, create } = state.selectedContact
     return {
-        id: state.selectedContact.id
+        id: id,
+        isModalVisible: create || !!id
     }
 }
 
-export default connect(mapStateToProps, { addContact })(ConatactCreate)
+export default connect(mapStateToProps, { addContact, clearCreateMode })(ConatactCreate)

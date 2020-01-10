@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
 import ContactForm from './ContactForm'
 import ContactDetail from './ContactDetail'
-import { editContact } from '../actions/contactActions'
+import { editContact, clearSelectedContact, clearEditMode } from '../actions/contactActions'
 
 // individual contact
 class ContactShow extends Component {
@@ -12,19 +13,37 @@ class ContactShow extends Component {
         this.props.editContact(this.props.id, formValues);
     }
 
+    onDismiss = () => {
+        this.props.clearSelectedContact()
+        this.props.clearEditMode()
+    }
+
+    actions = () => {
+        return [
+            { text: 'Cancel', onClick: this.onDismiss }
+        ]
+    }
+
     render() {
-        if (this.props.editMode) {
-            return <ContactForm initialValues={this.props.contact} onSubmit={this.onEdit} />
-        }
-        return <ContactDetail />
+        const initialValues = _.omit(this.props.contact, ['id'])
+        return (<ModalTransition>
+            {this.props.isModalVisible && (
+                <Modal actions={this.actions()} onClose={this.onDismiss} heading={this.props.editMode ? 'Edit Contact' : 'Contact Info'}>
+                    {this.props.editMode ? <ContactForm initialValues={initialValues} onSubmit={this.onEdit} /> : <ContactDetail />}
+                </Modal>
+            )}
+        </ModalTransition>)
+
     }
 }
 
 const mapStateToProps = (state) => {
+    const { id, edit } = state.selectedContact
     return {
-        id: state.selectedContact.id,
-        contact: state.contact[state.selectedContact.id],
-        editMode: state.selectedContact.edit
+        id: id,
+        contact: state.contact[id],
+        isModalVisible: !!id || (edit && id),
+        editMode: edit
     }
 }
-export default connect(mapStateToProps, { editContact })(ContactShow)
+export default connect(mapStateToProps, { editContact, clearSelectedContact, clearEditMode })(ContactShow)

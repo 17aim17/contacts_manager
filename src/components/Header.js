@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setCreateMode, clearCreateMode } from '../actions/contactActions'
+import { setCreateMode } from '../actions/contactActions'
 import { startLogout } from '../actions/authActions'
-import Modal from './Modal'
 import ContactCreate from './ContactCreate'
 
 class Header extends Component {
 
     onClick = () => {
         this.props.setCreateMode()
-    }
-
-    onDismiss = () => {
-        this.props.clearCreateMode()
     }
 
     render() {
@@ -22,24 +17,20 @@ class Header extends Component {
                     <button onClick={this.onClick}>Create Contact</button>
                     <button onClick={this.props.startLogout}>LogOut</button>
                 </div>
-                <Modal
-                    isModalVisible={this.props.isModalVisible}
-                    onDismiss={this.onDismiss}
-                >
-                    <ContactCreate />
-                </Modal>
+                {this.props.create && <ContactCreate />}
+
             </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    const { id, create } = state.selectedContact
+    const { create } = state.selectedContact
     return {
-        isModalVisible: create || id
+        create: create
     }
 }
 
 export default connect(mapStateToProps, {
-    setCreateMode, clearCreateMode, startLogout
+    setCreateMode, startLogout
 })(Header)

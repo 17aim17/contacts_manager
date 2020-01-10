@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Modal from './Modal'
 import ContactShow from './ContactShow'
 
-import { setSelectedContact, clearSelectedContact, clearEditMode } from '../actions/contactActions'
+import { setSelectedContact, setEditMode } from '../actions/contactActions'
 
 
 class ContactList extends Component {
@@ -13,18 +12,21 @@ class ContactList extends Component {
         this.props.setSelectedContact(id)
     }
 
-    onDismiss = () => {
-        this.props.clearSelectedContact()
-        this.props.clearEditMode()
+    onEditClick = (id) => {
+        this.props.setSelectedContact(id)
+        this.props.setEditMode()
     }
+
 
     renderItem = (contact) => {
         const { firstName, lastName, email, phone } = contact;
         return (
             <div key={contact.id} onClick={() => { this.onClick(contact.id) }}>
-                <p>{firstName ? firstName : '' + ' ' + lastName ? lastName : ''}</p>
+                <p>{firstName ? firstName : '' +
+                    lastName ? lastName : ''}</p>
                 <p>{email.length ? email[0].Email : ''}</p>
                 <p>{phone.length ? phone[0].Phone : ''}</p>
+                <button onClick={() => { this.onEditClick(contact.id) }} >Edit</button>
                 <hr></hr>
             </div>
         )
@@ -37,20 +39,18 @@ class ContactList extends Component {
                         return this.renderItem(contact)
                     })}
                 </div>
-                <Modal isModalVisible={this.props.isModalVisible} onDismiss={this.onDismiss}>
-                    <ContactShow />
-                </Modal>
+                {this.props.isShow && <ContactShow />}
             </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    const { id, edit } = state.selectedContact
+    const { id } = state.selectedContact
     return {
         contacts: Object.values(state.contact),
-        isModalVisible: id || (edit && id)
+        isShow: !!id
     }
 }
 
-export default connect(mapStateToProps, { setSelectedContact, clearSelectedContact, clearEditMode })(ContactList)
+export default connect(mapStateToProps, { setSelectedContact, setEditMode })(ContactList)
