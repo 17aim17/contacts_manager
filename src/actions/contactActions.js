@@ -1,10 +1,10 @@
-import { CREATE_CONTACT, SET_CONTACT, EDIT_CONTACT, DELETE_CONTACT, SET_SELECTED_CONTACT, CLEAR_SELECTED_CONTACT, SET_EDIT_MODE, CLEAR_EDIT_MODE, SET_CREATE_MODE, CLEAR_CREATE_MODE } from './types'
+import { CREATE_CONTACT, SET_CONTACT, UNSET_CONTACTS, EDIT_CONTACT, DELETE_CONTACT, SET_SELECTED_CONTACT, CLEAR_SELECTED_CONTACT, SET_EDIT_MODE, CLEAR_EDIT_MODE, SET_CREATE_MODE, CLEAR_CREATE_MODE } from './types'
 import { uuid } from 'uuidv4'
 import database from '../firebase'
 
-const uid = 'ASHISH_ONE'
 
 export const addContact = (data) => (dispatch, getState) => {
+    const uid = getState().auth.uid
     database.collection(`users/${uid}/contacts`).add(data).then((ref) => {
         dispatch(setSelectedContact(ref.id))
         dispatch(clearCreateMode())
@@ -52,6 +52,7 @@ export const syncSetContact = (contact) => {
 }
 
 export const editContact = (id, updates) => (dispatch, getState) => {
+    const uid = getState().auth.uid
     database.collection('users').doc(`${uid}`).collection('contacts').doc(`${id}`).update({ ...updates }).then((ref) => {
         dispatch(setSelectedContact(id))
         console.log('was here');
@@ -79,6 +80,7 @@ export const syncEditContact = (id, updates) => {
 }
 
 export const deleteContact = (id) => (dispatch, getState) => {
+    const uid = getState().auth.uid
     dispatch(clearSelectedContact())
     database.collection('users').doc(`${uid}`).collection('contacts').doc(`${id}`).delete().then(() => {
         dispatch({
@@ -94,6 +96,12 @@ export const syncDeleteContact = (id) => {
     return {
         type: DELETE_CONTACT,
         payload: id
+    }
+}
+
+export const unsetContacts = () => {
+    return {
+        type: UNSET_CONTACTS
     }
 }
 

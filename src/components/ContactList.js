@@ -23,22 +23,24 @@ class ContactList extends Component {
         return (
             <div key={contact.id} onClick={() => { this.onClick(contact.id) }}>
                 <p>{firstName ? firstName : '' + ' ' + lastName ? lastName : ''}</p>
-                <p>{email[0].Email}</p>
-                <p>{phone[0].Phone}</p>
+                <p>{email.length ? email[0].Email : ''}</p>
+                <p>{phone.length ? phone[0].Phone : ''}</p>
                 <hr></hr>
             </div>
         )
     }
     render() {
         return (
-            <div>
-                {this.props.contacts.map((contact) => {
-                    return this.renderItem(contact)
-                })}
+            <React.Fragment>
+                <div>
+                    {this.props.contacts.map((contact) => {
+                        return this.renderItem(contact)
+                    })}
+                </div>
                 <Modal isModalVisible={this.props.isModalVisible} onDismiss={this.onDismiss}>
                     <ContactShow />
                 </Modal>
-            </div>
+            </React.Fragment>
         )
     }
 }

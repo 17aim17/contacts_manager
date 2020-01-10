@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const overlay = {
     position: 'absolute', top: '0', left: '0',
-    height: '100vh', width: '100vw', background: 'silver', zIndex: '0'
+    height: '100vh', width: '100vw', background: 'silver', zIndex: '90'
 }
 const modal = {
     position: 'fixed',
@@ -21,7 +21,8 @@ const modal = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    zIndex: '99'
 }
 class Modal extends Component {
 

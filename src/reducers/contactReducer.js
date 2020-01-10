@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { CREATE_CONTACT, SET_CONTACT, EDIT_CONTACT, DELETE_CONTACT } from '../actions/types'
+import { CREATE_CONTACT, SET_CONTACT, UNSET_CONTACTS, EDIT_CONTACT, DELETE_CONTACT } from '../actions/types'
 
 export default (state = {}, action) => {
     switch (action.type) {
@@ -12,6 +12,8 @@ export default (state = {}, action) => {
             return { ...state, [action.payload.id]: action.payload }
         case DELETE_CONTACT:
             return _.omit(state, action.payload)
+        case UNSET_CONTACTS:
+            return {}
         default:
             return state
     }
