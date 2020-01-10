@@ -19,9 +19,11 @@ class ContactShow extends Component {
     }
 
     actions = () => {
-        return [
-            { text: 'Cancel', onClick: this.onDismiss }
-        ]
+        const actions = [{ text: 'Close', onClick: this.onDismiss }]
+        if(this.props.editMode){
+            actions.push({ text: 'Cancel', onClick: this.props.clearEditMode })
+        }
+        return actions
     }
 
     render() {

@@ -15,7 +15,7 @@ class ConatactCreate extends Component {
 
     actions = () => {
         return [
-            { text: 'Cancel', onClick: this.onDismiss }
+            { text: 'Close', onClick: this.onDismiss }
         ]
     }
 
