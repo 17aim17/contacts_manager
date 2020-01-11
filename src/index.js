@@ -4,6 +4,10 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
 
+import '@atlaskit/css-reset'
+import 'bootstrap/dist/css/bootstrap-grid.min.css'
+
+
 import App from './components/App';
 import reducers from './reducers'
 

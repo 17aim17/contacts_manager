@@ -66,6 +66,7 @@ class App extends Component {
       default:
         return <Spinner />
     }
+
   }
 }
 

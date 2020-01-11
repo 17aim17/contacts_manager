@@ -7,6 +7,8 @@ import ContactForm from './ContactForm'
 
 class ConatactCreate extends Component {
     onSubmit = (formValues) => {
+        console.log(formValues);
+
         this.props.addContact(formValues)
     }
     onDismiss = () => {
