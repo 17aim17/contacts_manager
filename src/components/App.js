@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
+import { Spinner } from 'react-bootstrap'
+
 import Header from './Header'
 import ContactList from './ContactList'
 import LoginPage from './LoginPage'
-import Spinner from './Spinner'
 import { syncSetContact, syncEditContact, syncDeleteContact, unsetContacts } from '../actions/contactActions'
 import { login, logout } from '../actions/authActions'
 import database, { firebase } from '../firebase'
@@ -64,7 +65,11 @@ class App extends Component {
       case false:
         return <LoginPage />
       default:
-        return <Spinner />
+        return (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw' }}>
+            <Spinner animation="border" />
+          </div>
+        )
     }
 
   }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
+import { Navbar, Container } from 'react-bootstrap'
+import Button from '@atlaskit/button'
 import { setCreateMode } from '../actions/contactActions'
 import { startLogout } from '../actions/authActions'
 import ContactCreate from './ContactCreate'
@@ -13,10 +16,12 @@ class Header extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>
-                    <button onClick={this.onClick}>Create Contact</button>
-                    <button onClick={this.props.startLogout}>LogOut</button>
-                </div>
+                <Navbar bg="white" className="py-2 mb-5">
+                    <Container>
+                        <Button appearance='primary' onClick={this.onClick}>Create Contact</Button>
+                        <Button appearance='danger' onClick={this.props.startLogout}>Log Out</Button>
+                    </Container>
+                </Navbar>
                 {this.props.create && <ContactCreate />}
 
             </React.Fragment>

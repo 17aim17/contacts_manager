@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
 
 import '@atlaskit/css-reset'
-import 'bootstrap/dist/css/bootstrap-grid.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 import App from './components/App';

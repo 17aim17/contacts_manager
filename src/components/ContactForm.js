@@ -20,7 +20,7 @@ class ContactForm extends Component {
     renderInput = ({ input, label, meta }) => {
         return (
             <div style={{ margin: '5px 0' }}>
-                <Textfield  {...input} autoComplete='off' placeholder={label} />
+                <Textfield  {...input} autoComplete='off' placeholder={label} isCompact />
             </div>
         )
     }
@@ -59,6 +59,10 @@ class ContactForm extends Component {
     }
 
     render() {
+        const hrStyles = {
+            background: '#DFE1E6',
+            border: '1px solid #DFE1E6'
+        }
         return (
             <Container>
 
@@ -72,7 +76,7 @@ class ContactForm extends Component {
                         <Field name="lastName" component={this.renderInput} label='Last Name' />
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr style={hrStyles}></hr>
                 <Row>
                     <Col sm={2} xs={2}>
                         <p>Company</p>
@@ -83,7 +87,7 @@ class ContactForm extends Component {
                         <Field name="jobTitle" component={this.renderInput} label='Job Title' />
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr style={hrStyles}></hr>
                 <Row>
                     <Col sm={2} xs={2}>
                         <p>Phone</p>
@@ -92,7 +96,7 @@ class ContactForm extends Component {
                         <FieldArray name="phone" component={this.renderArrayInput} label='Phone' />
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr style={hrStyles}></hr>
                 <Row>
                     <Col sm={2} xs={2}>
                         <p>Email</p>
@@ -101,7 +105,7 @@ class ContactForm extends Component {
                         <FieldArray name="email" component={this.renderArrayInput} label='Email' />
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr style={hrStyles}></hr>
                 <Row>
                     <Col sm={2} xs={2}>
                         <p>Address</p>
@@ -110,16 +114,16 @@ class ContactForm extends Component {
                         <FieldArray name="address" component={this.renderArrayInput} label='Address' />
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr style={hrStyles}></hr>
                 <Row>
                     <Col sm={2} xs={2}>
-                        <p>Events(Dates)</p>
+                        <p>Events</p>
                     </Col>
                     <Col sm={10} xs={10}>
                         <FieldArray name='events' component={this.renderArrayInput} label='Event' />
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr style={hrStyles}></hr>
                 <Row>
                     <Col sm={2} xs={2}>
                         <p>Websites</p>
@@ -128,7 +132,7 @@ class ContactForm extends Component {
                         <FieldArray name="website" component={this.renderArrayInput} label='Website' />
                     </Col>
                 </Row>
-                <hr></hr>
+                <hr style={hrStyles}></hr>
                 <Row>
                     <Col sm={2} xs={2}>
                         <p>Notes</p>
