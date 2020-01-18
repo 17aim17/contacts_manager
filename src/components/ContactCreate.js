@@ -24,7 +24,10 @@ class ConatactCreate extends Component {
     render() {
         return (<ModalTransition>
             {this.props.isModalVisible && (
-                <Modal actions={this.actions()} onClose={this.onDismiss} heading="Create a new Contact">
+                <Modal
+                    actions={this.actions()}
+                    onClose={this.onDismiss}
+                    heading="Create a new Contact">
                     <ContactForm onSubmit={this.onSubmit} />
                 </Modal>
             )}

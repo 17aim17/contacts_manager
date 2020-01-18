@@ -64,7 +64,7 @@ class ContactForm extends Component {
             border: '1px solid #DFE1E6'
         }
         return (
-            <Container>
+            <div>
 
                 <Row >
                     <Col sm={2} xs={2}>
@@ -147,7 +147,7 @@ class ContactForm extends Component {
                         <Button appearance="primary" onClick={this.props.handleSubmit(this.onSubmit)}>Save</Button>
                     </Col>
                 </Row>
-            </Container>
+            </div>
 
         )
     }

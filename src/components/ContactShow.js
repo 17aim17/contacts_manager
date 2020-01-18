@@ -20,7 +20,7 @@ class ContactShow extends Component {
 
     actions = () => {
         const actions = [{ text: 'Close', onClick: this.onDismiss }]
-        if(this.props.editMode){
+        if (this.props.editMode) {
             actions.push({ text: 'Cancel', onClick: this.props.clearEditMode })
         }
         return actions
@@ -30,7 +30,10 @@ class ContactShow extends Component {
         const initialValues = _.omit(this.props.contact, ['id'])
         return (<ModalTransition>
             {this.props.isModalVisible && (
-                <Modal actions={this.actions()} onClose={this.onDismiss} heading={this.props.editMode ? 'Edit Contact' : 'Contact Info'}>
+                <Modal
+                    actions={this.actions()}
+                    onClose={this.onDismiss}
+                    heading={this.props.editMode ? 'Edit Contact' : 'Contact Info'}>
                     {this.props.editMode ? <ContactForm initialValues={initialValues} onSubmit={this.onEdit} /> : <ContactDetail />}
                 </Modal>
             )}

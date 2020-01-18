@@ -91,7 +91,7 @@ class ContactDetail extends Component {
             notes } = this.props.contact;
 
         return (
-            <Container>
+            <div>
                 {/* Name */}
                 <Row>
                     <Col sm={7} xs={7}>
@@ -209,7 +209,7 @@ class ContactDetail extends Component {
                         </Col>
                     </Row><hr style={hrStyles}></hr> </React.Fragment>
                 }
-            </Container >
+            </div >
         )
     }
 }

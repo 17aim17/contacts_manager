@@ -16,7 +16,7 @@ class Header extends Component {
     render() {
         return (
             <React.Fragment>
-                <Navbar bg="white" className="py-2 mb-5">
+                <Navbar style={{ background: "#130f40" }} className="py-2 mb-5">
                     <Container>
                         <Button appearance='primary' onClick={this.onClick}>Create Contact</Button>
                         <Button appearance='danger' onClick={this.props.startLogout}>Log Out</Button>
