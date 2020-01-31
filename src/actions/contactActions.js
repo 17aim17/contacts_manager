@@ -1,8 +1,13 @@
 import { CREATE_CONTACT, SET_CONTACT, UNSET_CONTACTS, EDIT_CONTACT, DELETE_CONTACT, SET_SELECTED_CONTACT, CLEAR_SELECTED_CONTACT, SET_EDIT_MODE, CLEAR_EDIT_MODE, SET_CREATE_MODE, CLEAR_CREATE_MODE } from './types'
 import database from '../firebase'
 
+import _ from 'lodash'
 
 export const addContact = (data) => (dispatch, getState) => {
+    if (_.isEmpty(data)) {
+        dispatch(clearCreateMode())
+        return window.alert('Contact NOT SAVED as no information was provided')
+    }
     const uid = getState().auth.uid
     database.collection(`users/${uid}/contacts`).add(data).then((ref) => {
         dispatch(setSelectedContact(ref.id))

@@ -118,43 +118,58 @@ class ContactDetail extends Component {
                     </React.Fragment>)
                 }
                 {/* Phones */}
-                <Row className="mt-2">
-                    <Col sm={3} xs={3}>
-                        Phone
-                    </Col>
-                    <Col sm={9} xs={9}>
-                        <Row>
-                            {
-                                phone.map((phone, index) => {
-                                    return (
-                                        <Col sm={12} xs={12} key={phone.Phone + phone.Label + index}>
-                                            {this.renderPhone(phone)}
-                                        </Col>
-                                    )
-                                })
-                            }
-                        </Row>
-                    </Col>
-                </Row>
-                <hr style={hrStyles}></hr>
+                {
+                    phone && (
+                        <React.Fragment>
+                            <Row className="mt-2">
+                                <Col sm={3} xs={3}>
+                                    Phone
+                                 </Col>
+                                <Col sm={9} xs={9}>
+                                    <Row>
+                                        {
+                                            phone.map((phone, index) => {
+                                                return (
+                                                    <Col sm={12} xs={12} key={phone.Phone + phone.Label + index}>
+                                                        {this.renderPhone(phone)}
+                                                    </Col>
+                                                )
+                                            })
+                                        }
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <hr style={hrStyles}></hr>
+                        </React.Fragment>
+                    )
+                }
+
+
                 {/* Emails */}
-                <Row className="mt-2">
-                    <Col sm={3} xs={3}>
-                        Email
-                    </Col>
-                    <Col sm={9} xs={9}>
-                        <Row>
-                            {
-                                email.map((email, index) => {
-                                    return <Col sm={12} xs={12} key={email.Email + email.Label + index}>
-                                        {this.renderEmail(email)}
-                                    </Col>
-                                })
-                            }
-                        </Row>
-                    </Col>
-                </Row>
-                <hr style={hrStyles}></hr>
+                {
+                    email && (
+                        <React.Fragment>
+                            <Row className="mt-2">
+                                <Col sm={3} xs={3}>
+                                    Email
+                              </Col>
+                                <Col sm={9} xs={9}>
+                                    <Row>
+                                        {
+                                            email.map((email, index) => {
+                                                return <Col sm={12} xs={12} key={email.Email + email.Label + index}>
+                                                    {this.renderEmail(email)}
+                                                </Col>
+                                            })
+                                        }
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <hr style={hrStyles}></hr>
+                        </React.Fragment>
+                    )
+                }
+
                 {/* Addresses */}
                 {address && (
                     <React.Fragment>

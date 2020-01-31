@@ -156,7 +156,7 @@ class ContactForm extends Component {
 export default reduxForm({
     form: 'ContactForm',
     initialValues: {
-        email: [{}],
-        phone: [{}]
+        email: [undefined],
+        phone: [undefined]
     }
 })(ContactForm)

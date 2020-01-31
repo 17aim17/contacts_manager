@@ -5,11 +5,14 @@ import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
 import { addContact, clearCreateMode } from '../actions/contactActions'
 import ContactForm from './ContactForm'
 
+import { filterObject } from '../utils'
+
+
 class ConatactCreate extends Component {
     onSubmit = (formValues) => {
-        console.log(formValues);
+        const data = filterObject(formValues);
 
-        this.props.addContact(formValues)
+        this.props.addContact(data)
     }
     onDismiss = () => {
         this.props.clearCreateMode()

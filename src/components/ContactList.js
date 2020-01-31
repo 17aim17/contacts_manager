@@ -40,14 +40,15 @@ class ContactList extends Component {
         }
 
         const { firstName, lastName, email, phone } = contact;
+
         return (
             <tr style={trStyles} key={contact.id} onClick={() => { this.onClick(contact.id) }}>
                 <td><p>{firstName ? firstName : ''}{" "}
                     {lastName ? lastName : ''}
                 </p></td>
-                <td>{phone[0].Phone && this.renderLink(phone[0].Phone, 'tel')}</td>
+                <td>{(phone && phone[0]) ? this.renderLink(phone[0].Phone, 'tel') : ''}</td>
                 <td>{
-                    email[0].Email && this.renderLink(email[0].Email, 'mailto')
+                    (email && email[0]) ? this.renderLink(email[0].Email, 'mailto') : ''
                 }
                 </td>
                 <td>
