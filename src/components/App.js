@@ -49,8 +49,9 @@ class App extends Component {
             }
           });
         });
-    } else {
-      this.observer = null
+    }
+    else {
+      delete this.observer
     }
   }
 

@@ -6,11 +6,14 @@ import ContactForm from './ContactForm'
 import ContactDetail from './ContactDetail'
 import { editContact, clearSelectedContact, clearEditMode } from '../actions/contactActions'
 
+import { filterObject } from '../utils'
 // individual contact
 class ContactShow extends Component {
 
     onEdit = (formValues) => {
-        this.props.editContact(this.props.id, formValues);
+        const data = filterObject(formValues);
+        console.log(data);
+        this.props.editContact(this.props.id, data);
     }
 
     onDismiss = () => {
@@ -28,6 +31,8 @@ class ContactShow extends Component {
 
     render() {
         const initialValues = _.omit(this.props.contact, ['id'])
+        // console.log(initialValues);
+
         return (<ModalTransition>
             {this.props.isModalVisible && (
                 <Modal

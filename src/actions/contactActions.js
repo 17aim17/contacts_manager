@@ -56,10 +56,14 @@ export const syncSetContact = (contact) => {
 }
 
 export const editContact = (id, updates) => (dispatch, getState) => {
+    console.log(updates);
+    if (_.isEmpty(updates)) {
+        dispatch(clearEditMode())
+        return window.alert('Contact NOT SAVED as no information was provided')
+    }
     const uid = getState().auth.uid
-    database.collection('users').doc(`${uid}`).collection('contacts').doc(`${id}`).update({ ...updates }).then((ref) => {
+    database.collection('users').doc(`${uid}`).collection('contacts').doc(`${id}`).set({ ...updates }, { merge: false }).then((ref) => {
         dispatch(setSelectedContact(id))
-        console.log('was here');
         dispatch(clearEditMode())
         dispatch({
             type: EDIT_CONTACT,
@@ -72,8 +76,6 @@ export const editContact = (id, updates) => (dispatch, getState) => {
 }
 
 export const syncEditContact = (id, updates) => {
-    console.log('sync edit');
-
     return {
         type: EDIT_CONTACT,
         payload: {

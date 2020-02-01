@@ -11,9 +11,10 @@ import { filterObject } from '../utils'
 class ConatactCreate extends Component {
     onSubmit = (formValues) => {
         const data = filterObject(formValues);
-
+        console.log(data);
         this.props.addContact(data)
     }
+
     onDismiss = () => {
         this.props.clearCreateMode()
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import Button from '@atlaskit/button'
 import { deleteContact, setEditMode } from '../actions/contactActions'
 

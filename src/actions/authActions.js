@@ -19,5 +19,7 @@ export const logout = () => {
 };
 
 export const startLogout = () => (dispatch) => {
-    return firebase.auth().signOut();
+    window.location.reload()
+    firebase.auth().signOut();
+    return
 };

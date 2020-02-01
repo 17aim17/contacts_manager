@@ -6,7 +6,7 @@ import TextArea from '@atlaskit/textarea';
 // import Select, { CreatableSelect, CountrySelect } from '@atlaskit/select'
 import Button from '@atlaskit/button'
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 
 

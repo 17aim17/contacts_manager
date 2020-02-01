@@ -60,7 +60,7 @@ class ContactList extends Component {
         )
     }
     render() {
-        if (this.props.contacts.length == 0) {
+        if (this.props.contacts.length === 0) {
             return (
                 <Container className="text-center mt-5">
                     <p className="lead">You Currently Have No Contacts</p>
